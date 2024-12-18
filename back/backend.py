@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from rdflib import Graph
 from rdflib.plugins.sparql.processor import SPARQLResult
+import bcrypt
 
 app = Flask(__name__)
 CORS(app)
@@ -298,6 +299,39 @@ def get_rating_user():
         return jsonify({"error": f"Usuário '{user_name}' não encontrado."}), 404
 
     return jsonify(user_dict)
+
+@app.route("/register", methods=["POST"])
+def register_user():
+    """
+    Endpoint para registrar um novo usuário.
+    Body JSON: { "name": "<nome_do_usuário>", "email": "<email_do_usuário>", "password": "<senha_do_usuário>" }
+    """
+    user_data = request.get_json()
+    user_name = user_data.get("name")
+    user_email = user_data.get("email")
+    user_password = user_data.get("password")
+
+    if not user_name or not user_email or not user_password:
+        return jsonify({"error": "Nome, email e senha são obrigatórios."}), 400
+
+    # Hash the password
+    hashed_password = bcrypt.hashpw(user_password.encode('utf-8'), bcrypt.gensalt())
+
+    # Consulta SPARQL para inserir um novo usuário
+    sparql_insert = f"""
+    INSERT DATA {{
+        :{user_name.replace(" ", "_")} rdf:type :Usuário ;
+                    :temNomeUsuário "{user_name}" ;
+                    :temEmail "{user_email}" ;
+                    :temSenhaHash "{hashed_password}" .
+    }}
+    """
+
+    try:
+        graph.update(sparql_insert)
+        return jsonify({"message": "Usuário registrado com sucesso."}), 201
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
