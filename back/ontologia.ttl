@@ -1,0 +1,973 @@
+@prefix : <http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/> .
+
+<http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia> rdf:type owl:Ontology ;
+                                                                rdfs:comment "Trabalho para a disciplina de Web Semântica de construção de uma ontologia e RD para descrever um sistema de recomendação de filmes."@pt-br .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/avaliadoPor
+:avaliadoPor rdf:type owl:ObjectProperty ;
+             rdfs:domain :Filme ;
+             rdfs:range :Avaliação .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/avaliadoPorUsuario
+:avaliadoPorUsuario rdf:type owl:ObjectProperty ;
+                    rdfs:domain :Avaliação ;
+                    rdfs:range :Usuário .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/avaliou
+:avaliou rdf:type owl:ObjectProperty ;
+         rdfs:domain :Usuário ;
+         rdfs:range :Avaliação .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/avaliouFilme
+:avaliouFilme rdf:type owl:ObjectProperty ;
+              rdfs:domain :Avaliação ;
+              rdfs:range :Filme .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temAtor
+:temAtor rdf:type owl:ObjectProperty ;
+         rdfs:domain :Filme ;
+         rdfs:range :Ator .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temDiretor
+:temDiretor rdf:type owl:ObjectProperty ;
+            rdfs:domain :Filme ;
+            rdfs:range :Diretor .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temPreferência
+:temPreferência rdf:type owl:ObjectProperty ;
+                rdfs:domain :Usuário ;
+                rdfs:range :Ator ,
+                           :Temática .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temPrêmio
+:temPrêmio rdf:type owl:ObjectProperty ;
+           rdfs:domain :Filme ;
+           rdfs:range :Prêmio .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temTemática
+:temTemática rdf:type owl:ObjectProperty ;
+             rdfs:domain :Filme ;
+             rdfs:range :Temática .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temAnoProdução
+:temAnoProdução rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Filme ;
+                rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temAnoPrêmio
+:temAnoPrêmio rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Prêmio ;
+              rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temEmail
+:temEmail rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Usuário ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temIdadeUsuário
+:temIdadeUsuário rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :Usuário ;
+                 rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temNomeAtor
+:temNomeAtor rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Ator ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temNomeDiretor
+:temNomeDiretor rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Diretor ;
+                rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temNomePrêmio
+:temNomePrêmio rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Prêmio ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temNomeTemática
+:temNomeTemática rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Temática ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temNomeUsuário
+:temNomeUsuário rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Usuário ;
+                rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temNota
+:temNota rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Avaliação ;
+         rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temTítuloOriginal
+:temTítuloOriginal rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Filme ;
+                   rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temWhatsapp
+:temWhatsapp rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :Usuário ;
+             rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Ator
+:Ator rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Avaliação
+:Avaliação rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :avaliadoPorUsuario ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Usuário
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :avaliouFilme ;
+                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Filme
+                           ] .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Diretor
+:Diretor rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Documentário
+:Documentário rdf:type owl:Class ;
+              rdfs:subClassOf :Filme ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :temAtor ;
+                                owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+                                owl:onClass :Ator
+                              ] .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Filme
+:Filme rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :temDiretor ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Diretor
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :temTemática ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Temática
+                       ] .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Filme_Comum
+:Filme_Comum rdf:type owl:Class ;
+             rdfs:subClassOf :Filme ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty :temAtor ;
+                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass :Ator
+                             ] .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Prêmio
+:Prêmio rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Temática
+:Temática rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Usuário
+:Usuário rdf:type owl:Class ;
+         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                           owl:onProperty :temPreferência ;
+                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Ator
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :temPreferência ;
+                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                           owl:onClass :Temática
+                         ] .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/A_Noviça_Rebelde
+:A_Noviça_Rebelde rdf:type owl:NamedIndividual ,
+                           :Filme_Comum;
+                  :temAtor :Julie_Andrews ;
+                  :temDiretor :Robert_Wise ;
+                  :temPrêmio :Oscar_Melhor_Diretor ,
+                             :Oscar_Melhor_Filme ;
+                  :temTemática :Musical ,
+                               :Romance ;
+                  :temAnoProdução 1965 ;
+                  :temTítuloOriginal "A Noviça Rebelde" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/A_Troca
+:A_Troca rdf:type owl:NamedIndividual ,
+                  :Filme_Comum ;
+         :temAtor :Angelina_Jolie ;
+         :temDiretor :Clint_Eastwood ;
+         :temTemática :Drama ,
+                      :Suspense ;
+         :temAnoProdução 2008 ;
+         :temTítuloOriginal "A Troca" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Al_Pacino
+:Al_Pacino rdf:type owl:NamedIndividual ,
+                    :Ator ;
+           :temNomeAtor "Al Pacino" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Angelina_Jolie
+:Angelina_Jolie rdf:type owl:NamedIndividual ,
+                         :Ator ;
+                :temNomeAtor "Angelina Jolie" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Aubrey_Plaza
+:Aubrey_Plaza rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Audrey_Plaza
+:Audrey_Plaza rdf:type owl:NamedIndividual ,
+                       :Ator ;
+              :temNomeAtor "Audrey Plaza" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Avaliação_LalaLand_Jose_Simões
+:Avaliação_LalaLand_Jose_Simões rdf:type owl:NamedIndividual ,
+                                         :Avaliação ;
+                                :avaliadoPorUsuario :José_Simões ;
+                                :avaliouFilme :La_La_Land ;
+                                :temNota 2 .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Avaliação_Poderoso_Chefao_Jose_Simões
+:Avaliação_Poderoso_Chefao_Jose_Simões rdf:type owl:NamedIndividual ,
+                                                :Avaliação ;
+                                       :avaliadoPorUsuario :José_Simões ;
+                                       :avaliouFilme :O_Poderoso_Chefão ;
+                                       :temNota 5 .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Avaliação_Ponto_Final_Jose_Simões
+:Avaliação_Ponto_Final_Jose_Simões rdf:type owl:NamedIndividual ,
+                                            :Avaliação ;
+                                   :avaliadoPorUsuario :José_Simões ;
+                                   :avaliouFilme :Ponto_Final ;
+                                   :temNota 3 .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Avaliação_Show_Truman_Jose_Simões
+:Avaliação_Show_Truman_Jose_Simões rdf:type owl:NamedIndividual ,
+                                            :Avaliação ;
+                                   :avaliadoPorUsuario :José_Simões ;
+                                   :avaliouFilme :O_Show_de_Truman ;
+                                   :temNota 1 .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Avaliação_Tropa_de_Elite_Jose_Simões
+:Avaliação_Tropa_de_Elite_Jose_Simões rdf:type owl:NamedIndividual ,
+                                               :Avaliação ;
+                                      :avaliadoPorUsuario :José_Simões ;
+                                      :avaliouFilme :Tropa_de_Elite ;
+                                      :temNota 4 .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Ação
+:Ação rdf:type owl:NamedIndividual ,
+               :Temática ;
+      :temNomeTemática "Ação" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/BAFTA_Melhor_Filme
+:BAFTA_Melhor_Filme rdf:type owl:NamedIndividual ,
+                             :Prêmio ;
+                    :temNomePrêmio "BAFTA - Melhor Filme" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Baz_Luhrmann
+:Baz_Luhrmann rdf:type owl:NamedIndividual ,
+                       :Diretor ;
+              :temNomeDiretor "Baz Luhrmann" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Billy_Wilder
+:Billy_Wilder rdf:type owl:NamedIndividual ,
+                       :Diretor ;
+              :temNomeDiretor "Billy Wilder" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Brad_Pitt
+:Brad_Pitt rdf:type owl:NamedIndividual ,
+                    :Ator ;
+           :temNomeAtor "Brad Pitt" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Cannes_Palme_dOr
+:Cannes_Palme_dOr rdf:type owl:NamedIndividual ,
+                           :Prêmio ;
+                  :temNomePrêmio "Cannes - Palma de Ouro" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Christopher_Nolan
+:Christopher_Nolan rdf:type owl:NamedIndividual ,
+                            :Diretor ;
+                   :temNomeDiretor "Christopher Nolan" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Clint_Eastwood
+:Clint_Eastwood rdf:type owl:NamedIndividual ,
+                         :Diretor ;
+                :temNomeDiretor "Clint Eastwood" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Clube_da_Luta
+:Clube_da_Luta rdf:type owl:NamedIndividual ,
+                        :Filme_Comum;
+               :temAtor :Brad_Pitt ;
+               :temDiretor :David_Fincher ;
+               :temTemática :Drama ,
+                            :Thriller ;
+               :temAnoProdução 1999 ;
+               :temTítuloOriginal "Clube da Luta" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Comédia
+:Comédia rdf:type owl:NamedIndividual ,
+                  :Temática ;
+         :temNomeTemática "Comédia" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Crime
+:Crime rdf:type owl:NamedIndividual ,
+                :Temática ;
+       :temNomeTemática "Crime" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Damien_Chazelle
+:Damien_Chazelle rdf:type owl:NamedIndividual ,
+                          :Diretor ;
+                 :temNomeDiretor "Damien Chazelle" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/David_Fincher
+:David_Fincher rdf:type owl:NamedIndividual ,
+                        :Diretor ;
+               :temNomeDiretor "David Fincher" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/De_Olhos_Bem_Fechados
+:De_Olhos_Bem_Fechados rdf:type owl:NamedIndividual ,
+                                :Filme_Comum;
+                       :temAtor :Tom_Cruise ;
+                       :temDiretor :Stanley_Kubrick ;
+                       :temTemática :Drama ,
+                                    :Suspense ;
+                       :temAnoProdução 1999 ;
+                       :temTítuloOriginal "De Olhos Bem Fechados" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Denis_Villeneuve
+:Denis_Villeneuve rdf:type owl:NamedIndividual ,
+                           :Diretor ;
+                  :temNomeDiretor "Denis Villeneuve" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Drama
+:Drama rdf:type owl:NamedIndividual ,
+                :Temática ;
+       :temNomeTemática "Drama" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Eddie_Murphy
+:Eddie_Murphy rdf:type owl:NamedIndividual ,
+                       :Ator ;
+              :temNomeAtor "Eddie Murphy" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Edward_Mãos_de_Tesoura
+:Edward_Mãos_de_Tesoura rdf:type owl:NamedIndividual ,
+                                 :Filme_Comum ;
+                        :temAtor :Johnny_Depp ;
+                        :temDiretor :Tim_Burton ;
+                        :temTemática :Drama ,
+                                     :Fantasia ,
+                                     :Romance ;
+                        :temAnoProdução 1990 ;
+                        :temTítuloOriginal "Edward Mãos de Tesoura" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Emilly_Blunt
+:Emilly_Blunt rdf:type owl:NamedIndividual ,
+                       :Ator ;
+              :temNomeAtor "Emilly Blunt" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Emily_Blunt
+:Emily_Blunt rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Emma_Stone
+:Emma_Stone rdf:type owl:NamedIndividual ,
+                     :Ator ;
+            :temNomeAtor "Emma Stone" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Fantasia
+:Fantasia rdf:type owl:NamedIndividual ,
+                   :Temática ;
+          :temNomeTemática "Fantasia" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Ficção_Científica
+:Ficção_Científica rdf:type owl:NamedIndividual ,
+                            :Temática ;
+                   :temNomeTemática "Ficção Científica" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Francis_Ford_Coppola
+:Francis_Ford_Coppola rdf:type owl:NamedIndividual ,
+                               :Diretor ;
+                      :temNomeDiretor "Francis Ford Coppola" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Frank_Darabont
+:Frank_Darabont rdf:type owl:NamedIndividual ,
+                         :Diretor ;
+                :temNomeDiretor "Frank Darabont" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Globo_de_Ouro_Melhor_Ator
+:Globo_de_Ouro_Melhor_Ator rdf:type owl:NamedIndividual ,
+                                    :Prêmio ;
+                           :temNomePrêmio "Globo de Ouro - Melhor Ator" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Globo_de_Ouro_Melhor_Atriz
+:Globo_de_Ouro_Melhor_Atriz rdf:type owl:NamedIndividual ,
+                                     :Prêmio ;
+                            :temNomePrêmio "Globo de Ouro - Melhor Atriz" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Globo_de_Ouro_Melhor_Diretor
+:Globo_de_Ouro_Melhor_Diretor rdf:type owl:NamedIndividual ,
+                                       :Prêmio ;
+                              :temNomePrêmio "Globo de Ouro - Melhor Diretor" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Globo_de_Ouro_Melhor_Filme
+:Globo_de_Ouro_Melhor_Filme rdf:type owl:NamedIndividual ,
+                                     :Prêmio ;
+                            :temNomePrêmio "Globo de Ouro - Melhor Filme" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Harrison_Ford
+:Harrison_Ford rdf:type owl:NamedIndividual ,
+                        :Ator ;
+               :temNomeAtor "Harrison Ford" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Heath_Ledger
+:Heath_Ledger rdf:type owl:NamedIndividual ,
+                       :Ator ;
+              :temNomeAtor "Heath Ledger" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Jeff_Baena
+:Jeff_Baena rdf:type owl:NamedIndividual ,
+                     :Diretor ;
+            :temNomeDiretor "Jeff Baena" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Jim_Carrey
+:Jim_Carrey rdf:type owl:NamedIndividual ,
+                     :Ator ;
+            :temNomeAtor "Jim Carrey" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/John_Landis
+:John_Landis rdf:type owl:NamedIndividual ,
+                      :Diretor ;
+             :temNomeDiretor "John Landis" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Johnny_Depp
+:Johnny_Depp rdf:type owl:NamedIndividual ,
+                      :Ator ;
+             :temNomeAtor "Johnny Depp" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Jose_Padilha
+:Jose_Padilha rdf:type owl:NamedIndividual ,
+                       :Diretor ;
+              :temNomeDiretor "José Padilha" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/José_Simões
+:José_Simões rdf:type owl:NamedIndividual ,
+                      :Usuário ;
+             :avaliou :Avaliação_LalaLand_Jose_Simões ,
+                      :Avaliação_Poderoso_Chefao_Jose_Simões ,
+                      :Avaliação_Ponto_Final_Jose_Simões ,
+                      :Avaliação_Show_Truman_Jose_Simões ,
+                      :Avaliação_Tropa_de_Elite_Jose_Simões ;
+             :temPreferência :Al_Pacino ,
+                             :Crime ,
+                             :Wagner_Moura ;
+             :temEmail "josesimoes@email.com" ;
+             :temIdadeUsuário 37 ;
+             :temNomeUsuário "José Simões" ;
+             :temWhatsapp "11123456789" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Julie_Andrews
+:Julie_Andrews rdf:type owl:NamedIndividual ,
+                        :Ator ;
+               :temNomeAtor "Julie Andrews" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/La_La_Land
+:La_La_Land rdf:type owl:NamedIndividual ,
+                     :Filme_Comum;
+            :avaliadoPor :Avaliação_LalaLand_Jose_Simões ;
+            :temAtor :Emma_Stone ;
+            :temDiretor :Damien_Chazelle ;
+            :temPrêmio :Globo_de_Ouro_Melhor_Diretor ,
+                       :Globo_de_Ouro_Melhor_Filme ,
+                       :Oscar_Melhor_Atriz ,
+                       :Oscar_Melhor_Diretor ;
+            :temTemática :Drama ,
+                         :Musical ,
+                         :Romance ;
+            :temAnoProdução 2016 ;
+            :temTítuloOriginal "La La Land" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Leonardo_DiCaprio
+:Leonardo_DiCaprio rdf:type owl:NamedIndividual ,
+                            :Ator ;
+                   :temNomeAtor "Leonardo DiCaprio" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Marilyn_Monroe
+:Marilyn_Monroe rdf:type owl:NamedIndividual ,
+                         :Ator ;
+                :temNomeAtor "Marilyn Monroe" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Martin_Scorsese
+:Martin_Scorsese rdf:type owl:NamedIndividual ,
+                          :Diretor ;
+                 :temNomeDiretor "Martin Scorsese" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Mel_Gibson
+:Mel_Gibson rdf:type owl:NamedIndividual ,
+                     :Ator ;
+            :temNomeAtor "Mel Gibson" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Morgan_Freeman
+:Morgan_Freeman rdf:type owl:NamedIndividual ,
+                         :Ator ;
+                :temNomeAtor "Morgan Freeman" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Moulin_Rouge
+:Moulin_Rouge rdf:type owl:NamedIndividual ,
+                       :Filme_Comum;
+              :temAtor :Nicole_Kidman ;
+              :temDiretor :Baz_Luhrmann ;
+              :temPrêmio :Globo_de_Ouro_Melhor_Filme ;
+              :temTemática :Comédia ,
+                           :Musical ,
+                           :Romance ;
+              :temAnoProdução 2001 ;
+              :temTítuloOriginal "Moulin Rouge! - Amor em Vermelho" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Musical
+:Musical rdf:type owl:NamedIndividual ,
+                  :Temática ;
+         :temNomeTemática "Musical" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Máquina_Mortífera
+:Máquina_Mortífera rdf:type owl:NamedIndividual ,
+                            :Filme_Comum;
+                   :temAtor :Mel_Gibson ;
+                   :temDiretor :Richard_Donner ;
+                   :temTemática :Ação ,
+                                :Crime ,
+                                :Drama ;
+                   :temAnoProdução 1987 ;
+                   :temTítuloOriginal "Máquina Mortífera" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Nicole_Kidman
+:Nicole_Kidman rdf:type owl:NamedIndividual ,
+                        :Ator ;
+               :temNomeAtor "Nicole Kidman" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Cavaleiro_das_Trevas
+:O_Cavaleiro_das_Trevas rdf:type owl:NamedIndividual ,
+                                 :Filme_Comum;
+                        :temAtor :Heath_Ledger ;
+                        :temDiretor :Christopher_Nolan ;
+                        :temPrêmio :Oscar_Melhor_Ator ;
+                        :temTemática :Ação ,
+                                     :Crime ,
+                                     :Drama ;
+                        :temAnoProdução 2008 ;
+                        :temTítuloOriginal "O Cavaleiro das Trevas" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Lobo_de_Wall_Street
+:O_Lobo_de_Wall_Street rdf:type owl:NamedIndividual ,
+                                :Filme_Comum;
+                       :temAtor :Leonardo_DiCaprio ;
+                       :temDiretor :Martin_Scorsese ;
+                       :temTemática :Comédia ,
+                                    :Drama ,
+                                    :Suspense ;
+                       :temAnoProdução 2013 ;
+                       :temTítuloOriginal "O Lobo de Wall Street" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Poderoso_Chefão
+:O_Poderoso_Chefão rdf:type owl:NamedIndividual ,
+                            :Filme_Comum ;
+                   :avaliadoPor :Avaliação_Poderoso_Chefao_Jose_Simões ;
+                   :temAtor :Al_Pacino ;
+                   :temDiretor :Francis_Ford_Coppola ;
+                   :temPrêmio :Oscar_Melhor_Diretor ,
+                              :Oscar_Melhor_Filme ;
+                   :temTemática :Crime ,
+                                :Drama ;
+                   :temAnoProdução 1972 ;
+                   :temTítuloOriginal "O Poderoso Chefão" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Resgate_do_Soldado_Ryan
+:O_Resgate_do_Soldado_Ryan rdf:type owl:NamedIndividual ,
+                                    :Filme_Comum;
+                           :temAtor :Tom_Hanks ;
+                           :temDiretor :Steven_Spielberg ;
+                           :temTemática :Ação ,
+                                        :Drama ;
+                           :temAnoProdução 1998 ;
+                           :temTítuloOriginal "O Resgate do Soldado Ryan" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Show_de_Truman
+:O_Show_de_Truman rdf:type owl:NamedIndividual ,
+                           :Filme_Comum;
+                  :avaliadoPor :Avaliação_Show_Truman_Jose_Simões ;
+                  :temAtor :Jim_Carrey ;
+                  :temDiretor :Peter_Weir ;
+                  :temPrêmio :Globo_de_Ouro_Melhor_Ator ;
+                  :temTemática :Comédia ,
+                               :Drama ,
+                               :Ficção_Científica ;
+                  :temAnoProdução 1998 ;
+                  :temTítuloOriginal "O Show de Truman" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Os_Caçadores_da_Arca_Perdida
+:Os_Caçadores_da_Arca_Perdida rdf:type owl:NamedIndividual ,
+                                       :Filme_Comum;
+                              :temAtor :Harrison_Ford ;
+                              :temDiretor :Steven_Spielberg ;
+                              :temTemática :Ação ,
+                                           :Fantasia ;
+                              :temAnoProdução 1981 ;
+                              :temTítuloOriginal "Os Caçadores da Arca Perdida" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Oscar_Melhor_Ator
+:Oscar_Melhor_Ator rdf:type owl:NamedIndividual ,
+                            :Prêmio ;
+                   :temNomePrêmio "Oscar - Melhor Ator" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Oscar_Melhor_Atriz
+:Oscar_Melhor_Atriz rdf:type owl:NamedIndividual ,
+                             :Prêmio ;
+                    :temNomePrêmio "Oscar - Melhor Atriz" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Oscar_Melhor_Diretor
+:Oscar_Melhor_Diretor rdf:type owl:NamedIndividual ,
+                               :Prêmio ;
+                      :temNomePrêmio "Oscar - Melhor Diretor" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Oscar_Melhor_Filme
+:Oscar_Melhor_Filme rdf:type owl:NamedIndividual ,
+                             :Prêmio ;
+                    :temNomePrêmio "Oscar - Melhor Filme" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Peter_Weir
+:Peter_Weir rdf:type owl:NamedIndividual ,
+                     :Diretor ;
+            :temNomeDiretor "Peter Weir" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Ponto_Final
+:Ponto_Final rdf:type owl:NamedIndividual ,
+                      :Filme_Comum;
+             :avaliadoPor :Avaliação_Ponto_Final_Jose_Simões ;
+             :temAtor :Scarlett_Johanson ;
+             :temDiretor :Woody_Allen ;
+             :temTemática :Ação ,
+                          :Crime ,
+                          :Romance ;
+             :temAnoProdução 2005 ;
+             :temTítuloOriginal "Ponto Final: Match Point" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Pulp_Fiction
+:Pulp_Fiction rdf:type owl:NamedIndividual ,
+                       :Filme_Comum;
+              :temAtor :Samuel_L_Jackson ;
+              :temDiretor :Quentin_Tarantino ;
+              :temTemática :Crime ,
+                           :Drama ,
+                           :Thriller ;
+              :temAnoProdução 1994 ;
+              :temTítuloOriginal "Pulp Fiction: Tempo de Violência" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Quanto_Mais_Quente_Melhor
+:Quanto_Mais_Quente_Melhor rdf:type owl:NamedIndividual ,
+                                    :Filme_Comum;
+                           :temAtor :Marilyn_Monroe ;
+                           :temDiretor :Billy_Wilder ;
+                           :temPrêmio :Oscar_Melhor_Diretor ;
+                           :temTemática :Comédia ,
+                                        :Musical ;
+                           :temAnoProdução 1959 ;
+                           :temTítuloOriginal "Quanto Mais Quente Melhor" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Quentin_Tarantino
+:Quentin_Tarantino rdf:type owl:NamedIndividual ,
+                            :Diretor ;
+                   :temNomeDiretor "Quentin Tarantino" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Richard_Donner
+:Richard_Donner rdf:type owl:NamedIndividual ,
+                         :Diretor ;
+                :temNomeDiretor "Richard Donner" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Robert_De_Niro
+:Robert_De_Niro rdf:type owl:NamedIndividual ,
+                         :Ator ;
+                :temNomeAtor "Robert De Niro" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Robert_Wise
+:Robert_Wise rdf:type owl:NamedIndividual ,
+                      :Diretor ;
+             :temNomeDiretor "Robert Wise" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Romance
+:Romance rdf:type owl:NamedIndividual ,
+                  :Temática ;
+         :temNomeTemática "Romance" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Samuel_L_Jackson
+:Samuel_L_Jackson rdf:type owl:NamedIndividual ,
+                           :Ator ;
+                  :temNomeAtor "Samuel L Jackson" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Scarlett_Johanson
+:Scarlett_Johanson rdf:type owl:NamedIndividual ,
+                            :Ator ;
+                   :temNomeAtor "Scarlett Johanson" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Sicario
+:Sicario rdf:type owl:NamedIndividual ,
+                  :Filme_Comum;
+         :temAtor :Emily_Blunt ;
+         :temDiretor :Denis_Villeneuve ;
+         :temTemática :Ação ,
+                      :Drama ,
+                      :Suspense ;
+         :temAnoProdução 2015 ;
+         :temTítuloOriginal "Sicario" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Stanley_Kubrick
+:Stanley_Kubrick rdf:type owl:NamedIndividual ,
+                          :Diretor ;
+                 :temNomeDiretor "Stanley Kubrick" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Steven_Spielberg
+:Steven_Spielberg rdf:type owl:NamedIndividual ,
+                           :Diretor ;
+                  :temNomeDiretor "Steven Spielberg" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Suspense
+:Suspense rdf:type owl:NamedIndividual ,
+                   :Temática ;
+          :temNomeTemática "Suspense" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Terror
+:Terror rdf:type owl:NamedIndividual ,
+                 :Temática ;
+        :temNomeTemática "Terror" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Thriller
+:Thriller rdf:type owl:NamedIndividual ,
+                   :Temática ;
+          :temNomeTemática "Thriller" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Tim_Burton
+:Tim_Burton rdf:type owl:NamedIndividual ,
+                     :Diretor ;
+            :temNomeDiretor "Tim Burton" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Tom_Cruise
+:Tom_Cruise rdf:type owl:NamedIndividual ,
+                     :Ator ;
+            :temNomeAtor "Tom Cruise" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Tom_Hanks
+:Tom_Hanks rdf:type owl:NamedIndividual ,
+                    :Ator ;
+           :temNomeAtor "Tom Hanks" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Touro_Indomável
+:Touro_Indomável rdf:type owl:NamedIndividual ,
+                          :Filme_Comum;
+                 :temAtor :Robert_De_Niro ;
+                 :temDiretor :Martin_Scorsese ;
+                 :temPrêmio :Globo_de_Ouro_Melhor_Ator ,
+                            :Oscar_Melhor_Ator ;
+                 :temTemática :Ação ,
+                              :Comédia ,
+                              :Drama ;
+                 :temAnoProdução 1980 ;
+                 :temTítuloOriginal "Touro Indomável" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Tropa_de_Elite
+:Tropa_de_Elite rdf:type owl:NamedIndividual ,
+                         :Filme_Comum;
+                :avaliadoPor :Avaliação_Tropa_de_Elite_Jose_Simões ;
+                :temAtor :Wagner_Moura ;
+                :temDiretor :Jose_Padilha ;
+                :temTemática :Ação ,
+                             :Crime ;
+                :temAnoProdução 2007 ;
+                :temTítuloOriginal "Tropa de Elite" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Um_Príncipe_em_Nova_York
+:Um_Príncipe_em_Nova_York rdf:type owl:NamedIndividual ,
+                                   :Filme_Comum;
+                          :temAtor :Eddie_Murphy ;
+                          :temDiretor :John_Landis ;
+                          :temTemática :Comédia ,
+                                       :Romance ;
+                          :temAnoProdução 1988 ;
+                          :temTítuloOriginal "Um Príncipe em Nova York" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Um_Sonho_de_Liberdade
+:Um_Sonho_de_Liberdade rdf:type owl:NamedIndividual ,
+                                :Filme_Comum;
+                       :temAtor :Morgan_Freeman ;
+                       :temDiretor :Frank_Darabont ;
+                       :temTemática :Crime ,
+                                    :Drama ;
+                       :temAnoProdução 1994 ;
+                       :temTítuloOriginal "Um Sonho de Liberdade" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Vida_Após_Beth
+:Vida_Após_Beth rdf:type owl:NamedIndividual ,
+                         :Filme_Comum;
+                :temAtor :Aubrey_Plaza ;
+                :temDiretor :Jeff_Baena ;
+                :temTemática :Drama ,
+                             :Terror ;
+                :temAnoProdução 2014 ;
+                :temTítuloOriginal "Vida Após Beth" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Wagner_Moura
+:Wagner_Moura rdf:type owl:NamedIndividual ,
+                       :Ator ;
+              :temNomeAtor "Wagner Moura" .
+
+
+###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Woody_Allen
+:Woody_Allen rdf:type owl:NamedIndividual ,
+                      :Diretor ;
+             :temNomeDiretor "Woody Allen" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
