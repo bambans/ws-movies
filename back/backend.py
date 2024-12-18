@@ -245,6 +245,52 @@ def get_user():
 
     return jsonify(user_dict)
 
+@app.route("/user/preferences", methods=["GET"])
+def get_user_preferences():
+    """
+    Endpoint para buscar dados de um usário pelo nome.
+    Query String: ?name=<nome_do_usuário>
+    """
+    user_name = request.args.get("name")
+    if user_name:
+        # Consulta SPARQL para buscar dados de um usuário
+        sparql_query = f"""
+        SELECT ?user_name ?preference WHERE {{
+            ?user rdf:type :Usuário .
+            ?user :temNomeUsuário "{user_name}" .
+            ?user :temNomeUsuário ?user_name .
+            ?user :temPreferência ?preference .
+        }}
+        """
+    else:
+        sparql_query = f"""
+        SELECT ?user_name ?preference WHERE {{
+            ?user rdf:type :Usuário .
+            ?user :temNomeUsuário ?user_name .
+            ?user :temPreferência ?preference .
+        }}
+        """
+    
+    results = graph.query(sparql_query)
+    
+    user_dict = {}
+    
+    for result in results:
+        user_name = str(result.user_name)
+
+        if user_name not in user_dict:
+            user_dict[user_name] = []
+        
+        preference = str(result.preference).split("/")[-1]
+
+        if preference not in user_dict[user_name]:
+            user_dict[user_name].append(preference)
+    
+    if not user_dict:
+        return jsonify({"error": f"Usuário '{user_name}' não encontrado."}), 404
+
+    return jsonify(user_dict)
+
 
 @app.route("/rating_user", methods=["GET"])
 def get_rating_user():
