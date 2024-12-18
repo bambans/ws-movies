@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from rdflib import Graph
 from rdflib.plugins.sparql.processor import SPARQLResult
-import bcrypt
 
 app = Flask(__name__)
 CORS(app)
@@ -346,6 +345,46 @@ def get_rating_user():
 
     return jsonify(user_dict)
 
+@app.route("/recommendations", methods=["GET"])
+def recommend_movies():
+    """
+    Endpoint para recomendar filmes com base nas preferências do usuário.
+    Query String: ?name=<nome_do_usuário>
+    """
+    user_name = request.args.get("name")
+    if not user_name:
+        return jsonify({"error": "Nome do usuário é obrigatório."}), 400
+
+    # Consulta SPARQL para recomendar filmes com base nas preferências do usuário
+    sparql_query = f"""
+    SELECT ?movie_title WHERE {{
+        ?user rdf:type :Usuário ;
+              :temNomeUsuário "{user_name}" ;
+              :temPreferência ?preference .
+        ?class rdfs:subClassOf :Filme .
+        ?movie rdf:type ?class ;
+               :temGênero ?preference ;
+               :temTítuloOriginal ?movie_title .
+        ?movie rdf:type ?class ;
+            :temAtor ?preference ;
+            :temTítuloOriginal ?movie_title .
+        FILTER NOT EXISTS {{
+            ?rating rdf:type :Avaliação ;
+                    :avaliadoPorUsuario ?user ;
+                    :avaliouFilme ?movie .
+        }}
+    }}
+    """
+
+    results = graph.query(sparql_query)
+
+    recommendations = [str(result.movie_title) for result in results]
+
+    if not recommendations:
+        return jsonify({"message": "Nenhuma recomendação encontrada."}), 404
+
+    return jsonify({"recommendations": recommendations})
+
 @app.route("/register", methods=["POST"])
 def register_user():
     """
@@ -355,13 +394,10 @@ def register_user():
     user_data = request.get_json()
     user_name = user_data.get("name")
     user_email = user_data.get("email")
-    user_password = user_data.get("password")
+    user_number = user_data.get("user_number")
 
     if not user_name or not user_email or not user_password:
         return jsonify({"error": "Nome, email e senha são obrigatórios."}), 400
-
-    # Hash the password
-    hashed_password = bcrypt.hashpw(user_password.encode('utf-8'), bcrypt.gensalt())
 
     # Consulta SPARQL para inserir um novo usuário
     sparql_insert = f"""
@@ -369,7 +405,7 @@ def register_user():
         :{user_name.replace(" ", "_")} rdf:type :Usuário ;
                     :temNomeUsuário "{user_name}" ;
                     :temEmail "{user_email}" ;
-                    :temSenhaHash "{hashed_password}" .
+                    :temWhatsapp "{user_number}" .
     }}
     """
 
