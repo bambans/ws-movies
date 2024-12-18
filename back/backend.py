@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from rdflib import Graph
 from rdflib.plugins.sparql.processor import SPARQLResult
 
 app = Flask(__name__)
+CORS(app)
 
 # Carregar a ontologia
 graph = Graph()
