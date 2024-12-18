@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SPARQL Query Frontend</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <h1>SPARQL Query Frontend</h1>
+
+        <section id="query-section">
+            <h2>Custom Query</h2>
+            <form id="query-form">
+                <textarea
+                    id="query"
+                    rows="5"
+                    cols="50"
+                    placeholder="Enter your SPARQL query here..."
+                ></textarea
+                ><br />
+                <button type="submit">Submit Query</button>
+            </form>
+            <div id="query-result" class="result"></div>
+        </section>
+
+        <section id="movie-section">
+            <h2>Search Movie</h2>
+            <form id="movie-form">
+                <input
+                    type="text"
+                    id="movie-title"
+                    placeholder="Enter movie title"
+                />
+                <button type="submit">Search</button>
+            </form>
+            <div id="movie-result" class="result"></div>
+        </section>
+
+        <script src="scripts.js"></script>
+    </body>
+</html>
