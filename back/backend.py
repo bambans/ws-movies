@@ -12,7 +12,8 @@ graph = Graph()
 graph.parse("ontologia.ttl", format="turtle")
 
 # Namespaces
-ns = Namespace("http://www.amazingvideo.com/ontology#")
+# ns = Namespace("http://www.amazingvideo.com/ontology#")
+ns = Namespace("http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia#")
 graph.bind("amazing", ns)
 
 def format_result(result: SPARQLResult):
@@ -60,10 +61,10 @@ def register_user():
     # Consulta SPARQL para inserir um novo usuário
     sparql_insert = f"""
     INSERT DATA {{
-        :{user_name.replace(" ", "_")} rdf:type :Usuário ;
-                    :temNomeUsuário "{user_name}" ;
-                    :temEmail "{user_email}" ;
-                    :temWhatsapp "{user_number}" .
+        amazing:{user_name.replace(" ", "_")} rdf:type amazing:Usuário ;
+                    amazing:temNomeUsuário "{user_name}" ;
+                    amazing:temEmail "{user_email}" ;
+                    amazing:temWhatsapp "{user_number}" .
     }}
     """
 
@@ -132,7 +133,7 @@ def get_movie():
         # Consulta SPARQL para buscar dados do filme específico
         sparql_query = f"""
         SELECT ?property ?value WHERE {{
-            ?movie :temTítuloOriginal "{movie_title}" .
+            ?movie amazing:temTítuloOriginal "{movie_title}" .
             ?movie ?property ?value .
         }}
         """
@@ -149,7 +150,7 @@ def get_movie():
         sparql_query = f"""
         SELECT ?property ?value WHERE {{
             ?movie rdf:type ?class .
-            ?class rdfs:subClassOf :Filme .
+            ?class rdfs:subClassOf amazing:Filme .
             ?movie ?property ?value .
         }}
         """
@@ -250,36 +251,6 @@ def get_user():
         response = format_result(result)
         return jsonify(response)
 
-@app.route("/user/preferences", methods=["GET"])
-def get_user_preferences():
-    """
-    Endpoint para buscar dados de um usário pelo nome.
-    Query String: ?name=<nome_do_usuário>
-    """
-    user_name = request.args.get("name")
-    if user_name:
-        # Consulta SPARQL para buscar dados de um usuário
-        sparql_query = f"""
-        SELECT ?user_name ?preference WHERE {{
-            ?user rdf:type :Usuário .
-            ?user :temNomeUsuário "{user_name}" .
-            ?user :temNomeUsuário ?user_name .
-            ?user :temPreferência ?preference .
-        }}
-        """
-    else:
-        sparql_query = f"""
-        SELECT ?user_name ?preference WHERE {{
-            ?user rdf:type :Usuário .
-            ?user :temNomeUsuário ?user_name .
-            ?user :temPreferência ?preference .
-        }}
-        """
-
-    result = graph.query(sparql_query)
-    response = format_result(result)
-    return jsonify(response)
-
 @app.route('/rating', methods=['GET'])
 def get_rating():
     """
@@ -311,45 +282,93 @@ def get_rating():
         response = format_result(result)
         return jsonify(response)
 
-@app.route("/recommendations", methods=["GET"])
-def recommend_movies():
+@app.route("/preferences", methods=["GET"])
+def get_user_preferences():
     """
-    Endpoint para recomendar filmes com base nas preferências do usuário.
+    Endpoint para buscar dados de um usário pelo nome.
     Query String: ?name=<nome_do_usuário>
     """
     user_name = request.args.get("name")
-    if not user_name:
-        return jsonify({"error": "Nome do usuário é obrigatório."}), 400
-
-    # Consulta SPARQL para recomendar filmes com base nas preferências do usuário
-    sparql_query = f"""
-    SELECT ?movie_title WHERE {{
-        ?user rdf:type :Usuário ;
-              :temNomeUsuário "{user_name}" ;
-              :temPreferência ?preference .
-        ?class rdfs:subClassOf :Filme .
-        ?movie rdf:type ?class ;
-               :temGênero ?preference ;
-               :temTítuloOriginal ?movie_title .
-        ?movie rdf:type ?class ;
-            :temAtor ?preference ;
-            :temTítuloOriginal ?movie_title .
-        FILTER NOT EXISTS {{
-            ?rating rdf:type :Avaliação ;
-                    :avaliadoPorUsuario ?user ;
-                    :avaliouFilme ?movie .
+    if user_name:
+        # Consulta SPARQL para buscar dados de um usuário
+        # sparql_query = f"""
+        # select ?preferences where{{
+        # <http://www.amazingvideo.com/ontology#{user_name}> <http://www.amazingvideo.com/ontology#temPreferencia> ?preferences
+        # }}
+        # """
+        sparql_query = f"""
+        SELECT DISTINCT ?filme ?tematica ?titulo ?ano ?diretor ?ator
+        WHERE {{
+          # Subconsulta para obter as temáticas de filmes avaliados pelo usuário
+          {{
+            SELECT DISTINCT ?tematica
+            WHERE {{
+              ?rating amazing:avaliadoPorUsuario amazing:{user_name} .
+              ?rating amazing:temNota ?nota .
+              FILTER(xsd:integer(?nota) >= 4)
+              ?rating amazing:avaliouFilme ?filme .
+              ?filme amazing:temTemática ?tematica .
+            }}
+          }}
+          ?filme amazing:temTemática ?tematica .
+          ?filme amazing:temTítuloOriginal ?titulo .
+          ?filme amazing:temAnoProdução ?ano .
+          ?filme amazing:temDiretor ?diretor .
+          ?filme amazing:temAtor ?ator .
         }}
-    }}
-    """
+        """
+    else:
+        sparql_query = f"""
+        SELECT ?user_name ?preference WHERE {{
+            ?user rdf:type :Usuário .
+            ?user :temNomeUsuário ?user_name .
+            ?user :temPreferência ?preference .
+        }}
+        """
 
-    results = graph.query(sparql_query)
+    result = graph.query(sparql_query)
+    response = format_result(result)
+    return jsonify(response)
 
-    recommendations = [str(result.movie_title) for result in results]
+# @app.route("/recommendations", methods=["GET"])
+# def recommend_movies():
+#     """
+#     Endpoint para recomendar filmes com base nas preferências do usuário.
+#     Query String: ?name=<nome_do_usuário>
+#     """
+#     user_name = request.args.get("name")
+#     if not user_name:
+#         return jsonify({"error": "Nome do usuário é obrigatório."}), 400
 
-    if not recommendations:
-        return jsonify({"message": "Nenhuma recomendação encontrada."}), 404
+#     # Consulta SPARQL para recomendar filmes com base nas preferências do usuário
+#     sparql_query = f"""
+#     SELECT ?movie_title WHERE {{
+#         ?user rdf:type :Usuário ;
+#               :temNomeUsuário "{user_name}" ;
+#               :temPreferência ?preference .
+#         ?class rdfs:subClassOf :Filme .
+#         ?movie rdf:type ?class ;
+#                :temGênero ?preference ;
+#                :temTítuloOriginal ?movie_title .
+#         ?movie rdf:type ?class ;
+#             :temAtor ?preference ;
+#             :temTítuloOriginal ?movie_title .
+#         FILTER NOT EXISTS {{
+#             ?rating rdf:type :Avaliação ;
+#                     :avaliadoPorUsuario ?user ;
+#                     :avaliouFilme ?movie .
+#         }}
+#     }}
+#     """
 
-    return jsonify({"recommendations": recommendations})
+#     results = graph.query(sparql_query)
+
+#     recommendations = [str(result.movie_title) for result in results]
+
+#     if not recommendations:
+#         return jsonify({"message": "Nenhuma recomendação encontrada."}), 404
+
+#     return jsonify({"recommendations": recommendations})
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
