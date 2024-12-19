@@ -5,16 +5,28 @@
 - Otávio Rodrigues Bambans (nUSP: 12701582)
 - Pietro Zalla (nUSP: 12717606)
 
+## Requisitos
+
+> pip install flask flask-cors rdflib
+
 ## Execução
 
-pip install flask flask-cors rdflib
+Para executar o backend, execute o seguinte comando em uma sessão do terminal:
 
 ```bash
-python back/back.py
+cd back
+python backend.py
+```
+
+> O backend estará disponível em http://localhost:5000
+
+<br>
+
+Para executar o frontend, execute o seguinte comando em outra sessão do terminal:
+
+```bash
 cd front
 python -m http.server
 ```
 
-backend on http://localhost:5000
-
-frontend on http://localhost:8000
+> O frontend estará disponível em http://localhost:8000
