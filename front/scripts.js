@@ -142,34 +142,15 @@ if (listMoviesForm) {
   });
 }
 
-// const listPreferencesForm = document.getElementById("list-preferences-form");
-// if (listPreferencesForm) {
-//   listPreferencesForm.addEventListener("submit", async (event) => {
-//     event.preventDefault();
-//     const name = document.getElementById("list-preferences-user").value;
-//     try {
-//       const result = await fetchData("/user/preferences", { name });
-//       document.getElementById("list-preferences-result").innerText =
-//         // JSON.stringify(result, null, 1);
-//         result;
-//     } catch (error) {
-//       console.log(error);
-//       document.getElementById("list-preferences-result").innerText =
-//         "Error fetching preferences.";
-//     }
-//   });
-// }
-
 const listPreferencesForm = document.getElementById("list-preferences-form");
 if (listPreferencesForm) {
   listPreferencesForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const name = document.getElementById("list-preferences-user").value;
-
     try {
-      const result = await fetchData("/user/preferences", { name });
+      const result = await fetchData(`/preferences?name=${name}`);
       document.getElementById("list-preferences-result").innerText =
-        JSON.stringify(result, null, 2); // Pretty-print the JSON
+        JSON.stringify(result, null, 2);
     } catch (error) {
       console.error("Error fetching preferences:", error);
       document.getElementById("list-preferences-result").innerText =
