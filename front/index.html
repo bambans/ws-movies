@@ -3,12 +3,11 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>SPARQL Query Frontend</title>
-        <link rel="stylesheet" href="styles.css" />
+        <title>Amazing Video</title>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <h1>SPARQL Query Frontend</h1>
-
+        <h1>Amazing Video</h1>
         <section id="query-section">
             <h2>Custom Query</h2>
             <form id="query-form">
@@ -35,6 +34,85 @@
                 <button type="submit">Search</button>
             </form>
             <div id="movie-result" class="result"></div>
+        </section>
+
+        <section id="add-user">
+            <h2>Register user</h2>
+            <form id="add-user-form">
+                <input type="text" id="user-name" placeholder="User Name" />
+                <input
+                    type="email"
+                    id="user-email"
+                    placeholder="user@email.com"
+                />
+                <input
+                    type="number"
+                    id="user-number"
+                    placeholder="(00) 99999-1111"
+                /><br />
+                <button type="submit">Submit New User</button>
+            </form>
+            <div id="add-user-result" class="result"></div>
+        </section>
+
+        <section id="rating-section">
+            <h2>Rate a Movie</h2>
+            <form id="rating-form">
+                <input type="text" id="rating-user" placeholder="User Name" />
+                <input
+                    type="text"
+                    id="rating-movie"
+                    placeholder="Movie Title"
+                />
+                <input
+                    type="number"
+                    id="rating-value"
+                    placeholder="Rating (1-5)"
+                    min="0"
+                    max="5"
+                />
+                <button type="submit">Submit Rating</button>
+            </form>
+            <div id="rating-result" class="result"></div>
+        </section>
+
+        <section id="preference-section">
+            <h2>Add Preference</h2>
+            <form id="preference-form">
+                <input
+                    type="text"
+                    id="preference-user"
+                    placeholder="User Name"
+                />
+                <input
+                    type="text"
+                    id="preference-value"
+                    placeholder="Preference (e.g., Comedy)"
+                />
+                <button type="submit">Submit Preference</button>
+            </form>
+            <div id="preference-result" class="result"></div>
+        </section>
+
+        <section id="list-section">
+            <h2>List Movies</h2>
+            <form id="list-movies-form">
+                <button type="submit">List All Movies</button>
+            </form>
+            <div id="list-movies-result" class="result"></div>
+        </section>
+
+        <section id="list-preferences-section">
+            <h2>List Recommendations</h2>
+            <form id="list-preferences-form">
+                <input
+                    type="text"
+                    id="list-preferences-user"
+                    placeholder="User Name"
+                />
+                <button type="submit">List Recommendations</button>
+            </form>
+            <div id="list-preferences-result" class="result"></div>
         </section>
 
         <script src="scripts.js"></script>
