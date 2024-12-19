@@ -1,4 +1,4 @@
-@prefix : <http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/> .
+@prefix : <http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -71,13 +71,6 @@
 #################################################################
 #    Data properties
 #################################################################
-
-###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia#temSenhaHash
-:temSenhaHash rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf owl:topDataProperty ;
-              rdfs:domain :Usuário ;
-              rdfs:range xsd:string .
-
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/temAnoProdução
 :temAnoProdução rdf:type owl:DatatypeProperty ;
@@ -241,7 +234,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/A_Noviça_Rebelde
 :A_Noviça_Rebelde rdf:type owl:NamedIndividual ,
-                           :Filme_Comum ;
+                           :Filme_Comum;
                   :temAtor :Julie_Andrews ;
                   :temDiretor :Robert_Wise ;
                   :temPrêmio :Oscar_Melhor_Diretor ,
@@ -375,7 +368,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Clube_da_Luta
 :Clube_da_Luta rdf:type owl:NamedIndividual ,
-                        :Filme_Comum ;
+                        :Filme_Comum;
                :temAtor :Brad_Pitt ;
                :temDiretor :David_Fincher ;
                :temTemática :Drama ,
@@ -410,7 +403,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/De_Olhos_Bem_Fechados
 :De_Olhos_Bem_Fechados rdf:type owl:NamedIndividual ,
-                                :Filme_Comum ;
+                                :Filme_Comum;
                        :temAtor :Tom_Cruise ;
                        :temDiretor :Stanley_Kubrick ;
                        :temTemática :Drama ,
@@ -580,7 +573,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/La_La_Land
 :La_La_Land rdf:type owl:NamedIndividual ,
-                     :Filme_Comum ;
+                     :Filme_Comum;
             :avaliadoPor :Avaliação_LalaLand_Jose_Simões ;
             :temAtor :Emma_Stone ;
             :temDiretor :Damien_Chazelle ;
@@ -588,8 +581,7 @@
                        :Globo_de_Ouro_Melhor_Filme ,
                        :Oscar_Melhor_Atriz ,
                        :Oscar_Melhor_Diretor ;
-            :temTemática :Drama ,
-                         :Musical ,
+            :temTemática :Musical ,
                          :Romance ;
             :temAnoProdução 2016 ;
             :temTítuloOriginal "La La Land" .
@@ -627,7 +619,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Moulin_Rouge
 :Moulin_Rouge rdf:type owl:NamedIndividual ,
-                       :Filme_Comum ;
+                       :Filme_Comum;
               :temAtor :Nicole_Kidman ;
               :temDiretor :Baz_Luhrmann ;
               :temPrêmio :Globo_de_Ouro_Melhor_Filme ;
@@ -646,7 +638,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Máquina_Mortífera
 :Máquina_Mortífera rdf:type owl:NamedIndividual ,
-                            :Filme_Comum ;
+                            :Filme_Comum;
                    :temAtor :Mel_Gibson ;
                    :temDiretor :Richard_Donner ;
                    :temTemática :Ação ,
@@ -664,7 +656,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Cavaleiro_das_Trevas
 :O_Cavaleiro_das_Trevas rdf:type owl:NamedIndividual ,
-                                 :Filme_Comum ;
+                                 :Filme_Comum;
                         :temAtor :Heath_Ledger ;
                         :temDiretor :Christopher_Nolan ;
                         :temPrêmio :Oscar_Melhor_Ator ;
@@ -677,7 +669,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Lobo_de_Wall_Street
 :O_Lobo_de_Wall_Street rdf:type owl:NamedIndividual ,
-                                :Filme_Comum ;
+                                :Filme_Comum;
                        :temAtor :Leonardo_DiCaprio ;
                        :temDiretor :Martin_Scorsese ;
                        :temTemática :Comédia ,
@@ -703,7 +695,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Resgate_do_Soldado_Ryan
 :O_Resgate_do_Soldado_Ryan rdf:type owl:NamedIndividual ,
-                                    :Filme_Comum ;
+                                    :Filme_Comum;
                            :temAtor :Tom_Hanks ;
                            :temDiretor :Steven_Spielberg ;
                            :temTemática :Ação ,
@@ -714,7 +706,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/O_Show_de_Truman
 :O_Show_de_Truman rdf:type owl:NamedIndividual ,
-                           :Filme_Comum ;
+                           :Filme_Comum;
                   :avaliadoPor :Avaliação_Show_Truman_Jose_Simões ;
                   :temAtor :Jim_Carrey ;
                   :temDiretor :Peter_Weir ;
@@ -728,7 +720,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Os_Caçadores_da_Arca_Perdida
 :Os_Caçadores_da_Arca_Perdida rdf:type owl:NamedIndividual ,
-                                       :Filme_Comum ;
+                                       :Filme_Comum;
                               :temAtor :Harrison_Ford ;
                               :temDiretor :Steven_Spielberg ;
                               :temTemática :Ação ,
@@ -769,7 +761,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Ponto_Final
 :Ponto_Final rdf:type owl:NamedIndividual ,
-                      :Filme_Comum ;
+                      :Filme_Comum;
              :avaliadoPor :Avaliação_Ponto_Final_Jose_Simões ;
              :temAtor :Scarlett_Johanson ;
              :temDiretor :Woody_Allen ;
@@ -782,7 +774,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Pulp_Fiction
 :Pulp_Fiction rdf:type owl:NamedIndividual ,
-                       :Filme_Comum ;
+                       :Filme_Comum;
               :temAtor :Samuel_L_Jackson ;
               :temDiretor :Quentin_Tarantino ;
               :temTemática :Crime ,
@@ -794,7 +786,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Quanto_Mais_Quente_Melhor
 :Quanto_Mais_Quente_Melhor rdf:type owl:NamedIndividual ,
-                                    :Filme_Comum ;
+                                    :Filme_Comum;
                            :temAtor :Marilyn_Monroe ;
                            :temDiretor :Billy_Wilder ;
                            :temPrêmio :Oscar_Melhor_Diretor ;
@@ -848,7 +840,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Sicario
 :Sicario rdf:type owl:NamedIndividual ,
-                  :Filme_Comum ;
+                  :Filme_Comum;
          :temAtor :Emily_Blunt ;
          :temDiretor :Denis_Villeneuve ;
          :temTemática :Ação ,
@@ -908,7 +900,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Touro_Indomável
 :Touro_Indomável rdf:type owl:NamedIndividual ,
-                          :Filme_Comum ;
+                          :Filme_Comum;
                  :temAtor :Robert_De_Niro ;
                  :temDiretor :Martin_Scorsese ;
                  :temPrêmio :Globo_de_Ouro_Melhor_Ator ,
@@ -922,7 +914,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Tropa_de_Elite
 :Tropa_de_Elite rdf:type owl:NamedIndividual ,
-                         :Filme_Comum ;
+                         :Filme_Comum;
                 :avaliadoPor :Avaliação_Tropa_de_Elite_Jose_Simões ;
                 :temAtor :Wagner_Moura ;
                 :temDiretor :Jose_Padilha ;
@@ -934,7 +926,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Um_Príncipe_em_Nova_York
 :Um_Príncipe_em_Nova_York rdf:type owl:NamedIndividual ,
-                                   :Filme_Comum ;
+                                   :Filme_Comum;
                           :temAtor :Eddie_Murphy ;
                           :temDiretor :John_Landis ;
                           :temTemática :Comédia ,
@@ -945,7 +937,7 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Um_Sonho_de_Liberdade
 :Um_Sonho_de_Liberdade rdf:type owl:NamedIndividual ,
-                                :Filme_Comum ;
+                                :Filme_Comum;
                        :temAtor :Morgan_Freeman ;
                        :temDiretor :Frank_Darabont ;
                        :temTemática :Crime ,
@@ -956,11 +948,10 @@
 
 ###  http://www.semanticweb.org/lucas/ontologies/2024/9/ontologia/Vida_Após_Beth
 :Vida_Após_Beth rdf:type owl:NamedIndividual ,
-                         :Filme_Comum ;
+                         :Filme_Comum;
                 :temAtor :Aubrey_Plaza ;
                 :temDiretor :Jeff_Baena ;
-                :temTemática :Drama ,
-                             :Terror ;
+                :temTemática :Terror ;
                 :temAnoProdução 2014 ;
                 :temTítuloOriginal "Vida Após Beth" .
 
